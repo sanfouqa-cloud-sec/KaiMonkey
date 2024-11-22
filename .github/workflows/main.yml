@@ -4,8 +4,7 @@
   uses: ermetic/actions@v1
   with:
     # 
-    api-token: 
-    # 
+    api-token: OGQ4MTBjNTQtYjFjMy00YjQyLTgyMTEtM2YxZDA1YTMxMTQ2LjJhNzI3YmNiLTU1NDItNGYxMi04M2EwLTJiOWM5MGYxNjc0NS5aU0p3TDRwYlVBY2FYdGVkaE1MdDMyaWpVMXZkaHlyeQ==    # 
     api-url: https://uk.app.ermetic.com/
     # 
     code-branch: # optional, default is ${{ github.event_name != 'pull_request' && github.ref_name || github.head_ref }}
@@ -58,4 +57,10 @@
     # 
     types: terraform
     # optional
-          
+    steps:
+    - uses: actions/checkout@v3
+    - name: Scan IaC with Tenable Cloud Security
+      uses: tenable/cloud-security-actions/iac/scan@v1
+      with:
+        api-token: ${{ secrets.TENABLE_API_TOKEN }}
+        api-url: https://uk.app.ermetic.com
