@@ -44,8 +44,8 @@ steps:
     - name: Scan with Ermetic
       uses: ermetic/actions/iac/scan@v1
       with:
-        api-token: ${{ secrets.ERMETIC_API_TOKEN }}
-        api-url: https://us.app.ermetic.com
+        api-token: ${{ secrets.TENABLE_API_TOKEN }}
+        api-url: https://uk.app.ermetic.com
 
 
 
@@ -60,5 +60,5 @@ steps:
   - name: Sync with Ermetic
     uses: ermetic/actions/iac/sync/terraform@v1
     with:
-      api-token: ${{ secrets.ERMETIC_API_TOKEN }}
-      api-url: https://us.app.ermetic.com
+      api-token: ${{ secrets.TENABLE_API_TOKEN }}
+      api-url: https://uk.app.ermetic.com
