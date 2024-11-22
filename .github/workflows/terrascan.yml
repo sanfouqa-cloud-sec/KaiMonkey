@@ -47,18 +47,3 @@ steps:
         api-token: ${{ secrets.TENABLE_API_TOKEN }}
         api-url: https://uk.app.ermetic.com
 
-
-
-        
-steps:
-  - uses: actions/checkout@v3
-  # This step is required if your state file is stored remotely
-  - name: Pull remote terraform state
-    run: terraform state pull > terraform.tfstate
-    shell: bash
-  # This step is always required
-  - name: Sync with Ermetic
-    uses: ermetic/actions/iac/sync/terraform@v1
-    with:
-      api-token: ${{ secrets.TENABLE_API_TOKEN }}
-      api-url: https://uk.app.ermetic.com
