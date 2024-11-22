@@ -55,7 +55,7 @@
     silent: false
     # optional, default is false
     # 
-    types: terraform
+    types: terraform.tfstate
     # optional
     steps:
     - uses: actions/checkout@v3
