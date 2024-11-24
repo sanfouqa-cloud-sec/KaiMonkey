@@ -1,49 +1,28 @@
-on: [push]
+name: Ermetic IaC Scan Workflow
+
+on:
+  push:
+    branches:
+      - main  # Trigger scan when changes are pushed to the 'main' branch
+  pull_request:
+    branches:
+      - main  # Trigger scan on PRs targeting 'main'
+  # You can also use other events like schedule (cron) to trigger the scan periodically
 
 jobs:
-  terrascan_terraform_job:
+  ermetic-scan:
     runs-on: ubuntu-latest
-    name: terrascan-terraform
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Run Terrascan for terraform
-      id: terrascan
-      uses: accurics/terrascan-action@main
-      with:
-        iac_type: 'terraform'
-        iac_version: 'v14'
-        only_warn: true
-        sarif_upload: true
-        iac_dir: 'terraform'
-    - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: terrascan.sarif
-  terrascan_cft_job:
-    runs-on: ubuntu-latest
-    name: terrascan-cft
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Run Terrascan for cft
-      id: terrascan
-      uses: accurics/terrascan-action@main
-      with:
-        iac_type: 'cft'
-        only_warn: true
-        sarif_upload: true
-        iac_dir: 'cft'
-    - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: terrascan.sarif
 
-steps:
-    - uses: actions/checkout@v3
-    - name: Scan with Ermetic
-      uses: ermetic/actions/iac/scan@v1
-      with:
-        api-token: ${{ secrets.TENABLE_API_TOKEN }}
-        api-url: https://uk.app.ermetic.com
+    steps:
+      # Step 1: Checkout the code in your repository
+      - name: Checkout code
+        uses: actions/checkout@v3
 
+      # Step 2: Scan with Ermetic
+      - name: Scan with Ermetic
+        uses: ermetic/actions/iac/scan@v1
+        with:
+          api-token: ${{ secrets.TENABLE_API_TOKEN }}  # GitHub secret containing your Ermetic API token
+          api-url: https://uk.app.ermetic.com  # The Ermetic API URL (update based on your region, if needed)
+
+      # Optional: You can add more steps to handle scan results, notifications, or failure conditions
