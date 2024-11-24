@@ -25,4 +25,4 @@ jobs:
           api-token: ${{ secrets.TENABLE_API_TOKEN }}  # GitHub secret containing your Ermetic API token
           api-url: https://uk.app.ermetic.com  # The Ermetic API URL (update based on your region, if needed)
 
-      # Optional: You can add more steps to handle scan results, notifications, or failure conditions ok
+      # Optional: You can add more steps to handle scan results, notifications, or failure conditions
